@@ -269,7 +269,7 @@ body {
   padding-left: 35px;
 }
 
-#scoreWrap, #fieldWrap, #timestampWrap, #fieldValueWrap {
+#scoreWrap, #fieldWrap, #timestampWrap, #fieldValueWrap, #audioFileWrap {
   display: none;
 }
 

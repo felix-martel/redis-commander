@@ -16,6 +16,7 @@
         <div class="controls">
           <select id="keyType" name="keyType">
             <option value="string">String</option>
+            <option value="audio">Audio</option>
             <option value="list">List</option>
             <option value="set">Set</option>
             <option value="zset">Sorted Set</option>
@@ -40,6 +41,10 @@
         <div class="controls">
         </div>
       </div>
+      <span id="audioFileWrap" class="control-group">
+        <label class="control-label" for="audioFile">Audio File</label>
+        <input id="audioFile" name="audioFile" type="file" accept=".wav"/>
+      </span>
       <span id="fieldValueWrap" class="control-group">
         <label class="control-label" for="newFieldValue">Field</label>
         <textarea id="newFieldValue" name="fieldValue" class="modal-content-width" style="height: 200px;"></textarea>
@@ -61,4 +66,15 @@
   setupJsonInputValidator('addKeyValueIsJson', 'newStringValue');
   setupJsonInputValidator('addKeyFieldIsJson', 'newFieldValue');
   registerModalFocus('addKeyModal', 'keyValue');
+  document.getElementById('audioFile').addEventListener('change', function(e) {
+  const file = e.target.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = function(event) {
+      const base64 = event.target.result.split(',')[1];
+      document.getElementById('newStringValue').value = base64;
+    };
+    reader.readAsDataURL(file);
+  }
+});
 </script>
