@@ -7,9 +7,36 @@
   <label>Key: <b><%= key %></b></label>
   <label>TTL: <b><%= ttl %></b></label>
   <label>Type: <b>Audio</b></label>
-  <!-- read only for now, no binary data editing -->
   <audio controls><source src="data:audio/wav;base64,<%= base64Value %>" type="audio/wav"></audio>
+
+  <form id="editAudioForm" action="apiv1/key/<%= connectionId %>/<%= key %>" method="POST" class="form-vertical">
+    <br>
+    <input type="file" id="audioFile" accept=".wav,audio/wav" />
+    <input type="hidden" id="stringValue" name="stringValue" />
+    <input type="hidden" name="keyType" value="audio" />
+    <br><br>
+    <% if (!redisReadOnly) { %>
+    <button id="saveKeyButton" type="button" class="btn" onclick="submitAudioForm()">Save</button>
+    <% } %>
+  </form>
 </div>
 
 <script>
+  function submitAudioForm() {
+    const fileInput = document.getElementById('audioFile');
+    const file = fileInput.files[0];
+
+    if (!file) {
+      alert('Please select a WAV file');
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      const base64Data = e.target.result.split(',')[1];
+      document.getElementById('stringValue').value = base64Data;
+      $('#editAudioForm').trigger('submit');
+    };
+    reader.readAsDataURL(file);
+  }
 </script>
