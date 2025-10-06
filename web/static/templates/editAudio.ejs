@@ -1,0 +1,15 @@
+<div id="itemActionsBar">
+  <% if (!redisReadOnly) { %>
+  <button class="btn btn-danger" onclick="deleteKey('<%= connectionId %>','<%= key %>')">Delete Key</button>
+  <% } %>
+</div>
+<div id="itemData">
+  <label>Key: <b><%= key %></b></label>
+  <label>TTL: <b><%= ttl %></b></label>
+  <label>Type: <b>Audio</b></label>
+  <!-- read only for now, no binary data editing -->
+  <audio controls><source src="data:audio/wav;base64,<%= base64Value %>" type="audio/wav"></audio>
+</div>
+
+<script>
+</script>

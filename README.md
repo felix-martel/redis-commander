@@ -27,6 +27,7 @@ It can connect to Redis standalone server, Sentinel based setups and Redis Clust
 
 It has support for the following data types to view, add, update and delete data:
 * Strings
+* WAV Audio
 * Lists
 * Sets
 * Sorted Set
