@@ -338,6 +338,9 @@ function loadKey (connectionId, key, index) {
       case 'binary':
         selectTreeNodeBinary(keyData);
         break;
+      case 'audio':
+        selectTreeNodeAudio(keyData);
+        break;
       case 'ReJSON-RL':
         selectTreeNodeReJSON(keyData);
         break;
@@ -705,6 +708,19 @@ function selectTreeNodeBinary (data) {
     console.log('edit binary template rendered');
     idBody.find('.binaryView-hex').width(22 * data.columns);
     idBody.find('.binaryView-char').width(12 * data.columns);
+  });
+}
+
+function selectTreeNodeAudio (data) {
+  var tree = getKeyTree();
+  tree.set_icon(tree.get_selected(true)[0], 'images/treeAudio.png');
+
+  var idBody = $('#body');
+
+  data.base64Value = data.value.toString("base64");
+
+  renderEjs('templates/editAudio.ejs', data, idBody, function() {
+    console.log('edit audio template rendered');
   });
 }
 
