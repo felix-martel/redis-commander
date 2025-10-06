@@ -572,6 +572,12 @@ function setupAddKeyButton (connectionId) {
       fieldValue.hide();
       timestamp.hide();
     }
+    var audioField = newKeyModal.find('#audioFileWrap');
+    if ($(this).val() === 'audio') {
+      audioField.show();
+    } else {
+      audioField.hide();
+    }
   });
 }
 
